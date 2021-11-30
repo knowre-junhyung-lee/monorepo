@@ -7,7 +7,6 @@ phases:
   pre_build:
     commands:
       - echo Nothing to do in the pre_build phase...
-      - docker login 
   build:
     commands:
       - echo Build started on `date`
