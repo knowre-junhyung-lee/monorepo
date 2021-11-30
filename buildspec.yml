@@ -7,13 +7,15 @@ phases:
   pre_build:
     commands:
       - echo Nothing to do in the pre_build phase...
-      - aws s3 ls
   build:
     commands:
       - echo Build started on `date`
   post_build:
     commands:
       - echo Build completed on `date`
+      - aws s3 cp packages/cloudfront_service/index.html s3://junhyung-test-web --acl public-read
+      - zip packages/lambda_service/index.js index.zip
+      - aws lambda update-function-code --function-name lambda-svc --zip-file file://index.zip
 artifacts:
   files:
     - '**/*'
