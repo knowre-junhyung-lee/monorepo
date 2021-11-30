@@ -7,15 +7,21 @@ phases:
   pre_build:
     commands:
       - echo Nothing to do in the pre_build phase...
+      - echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USER} --password-stdin
   build:
     commands:
       - echo Build started on `date`
+      - docker build -t jhlee5391/http-server:latest .
+      - docker push jhlee5391/http-server:latest
   post_build:
     commands:
       - echo Build completed on `date`
-      - aws s3 cp packages/cloudfront_service/index.html s3://junhyung-test-web --acl public-read
-      - cd packages/lambda_service/ && zip index.zip index.js
-      - aws lambda update-function-code --function-name lambda-svc --zip-file fileb://index.zip
+      - aws ecs register-task-definition --cli-input-json file://task.json
+      - aws ecs update-service --cluster http-ecs-cluster --service http-ecs-service --task-definition http-server
+      # - aws s3 cp packages/cloudfront_service/index.html s3://junhyung-test-web --acl public-read
+      # - cd packages/lambda_service/ && zip index.zip index.js
+      # - aws lambda update-function-code --function-name lambda-svc --zip-file fileb://index.zip
+      
 artifacts:
   files:
     - '**/*'
