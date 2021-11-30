@@ -15,7 +15,7 @@ phases:
       - echo Build completed on `date`
       - aws s3 cp packages/cloudfront_service/index.html s3://junhyung-test-web --acl public-read
       - cd packages/lambda_service/ && zip index.zip index.js
-      - aws lambda update-function-code --function-name lambda-svc --zip-file file://packages/lambda_service/index.zip
+      - aws lambda update-function-code --function-name lambda-svc --zip-file file://index.zip
 artifacts:
   files:
     - '**/*'
