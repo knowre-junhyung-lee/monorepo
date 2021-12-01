@@ -9,6 +9,7 @@ phases:
     commands:
       - echo Nothing to do in the pre_build phase...
       - echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USER} --password-stdin
+      - npm install
   build:
     commands:
       - echo Build started on `date`
