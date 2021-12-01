@@ -4,6 +4,10 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint **/*.js --fix"
+  },
   "devDependencies": {
     "eslint": "^8.3.0",
     "lerna": "^4.0.0"

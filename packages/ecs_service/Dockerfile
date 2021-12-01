@@ -4,7 +4,7 @@ FROM node:14-alpine
 WORKDIR /usr/src/app
 
 # 앱 소스 추가
-COPY packages/ecs_service/http-server.js .
+COPY http-server.js .
 
 EXPOSE 3000
 CMD [ "node", "http-server.js" ]

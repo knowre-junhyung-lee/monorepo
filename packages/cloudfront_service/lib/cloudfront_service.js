@@ -1,7 +1,7 @@
-'use strict';
+// "use strict";
 
-module.exports = cloudfrontService;
+// module.exports = cloudfrontService;
 
-function cloudfrontService() {
-    // TODO
-}
+// function cloudfrontService() {
+//     // TODO
+// }
