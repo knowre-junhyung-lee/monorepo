@@ -14,15 +14,11 @@ phases:
     commands:
       - echo Build started on `date`
       - npm run lint
-      - cd packages/ecs_service && npm run build
-      - cd ../lambda_service && npm run build
-      - cd ../cloudfront_service && npm run build
+      - lerna run build
   post_build:
     commands:
       - echo Build completed on `date`
-      - cd ../ecs_service && npm run deploy
-      - cd ../lambda_service && npm run deploy
-      - cd ../cloudfront_service && npm run deploy
+      - lerna run deploy
       
 artifacts:
   files:

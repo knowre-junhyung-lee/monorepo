@@ -1,19 +1,24 @@
-var http = require("http")
-var hostname = process.env.BIND_IP || "0.0.0.0" 
-var port = process.env.BIND_PORT || 3000 
+var fs = require('fs');
+var dir = "./"
+const http = require("http")
+var files;
 
-var response =JSON.stringify({ message : "Hello, World!i" }) 
+const hostname = process.env.BIND_IP || "0.0.0.0"
+const port = process.env.BIND_PORT || 3000
 
-var server = http.createServer(function (req, res) {
-    res.statusCode = 200
-    res.setHeader("Content-Type", "text/json")
-    res.setHeader("Access-Control-Allow-Origin", "*")
-    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With")
-    res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE")
-    res.end(response)
-  })
+const response =JSON.stringify({ message : "Hello, World!" })
 
-server.listen(port, hostname, function () {
-    console.log(`Server running at http://${hostname}:${port}/`)
-  })
-  
+const server = http.createServer((req, res) => {
+  files = fs.readdirSync(dir);
+  console.log(files);
+  res.statusCode = 200
+  res.setHeader("Content-Type", "application/json")
+  res.setHeader("Access-Control-Allow-Origin", "*")
+  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+  res.end(response)
+})
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`)
+})
