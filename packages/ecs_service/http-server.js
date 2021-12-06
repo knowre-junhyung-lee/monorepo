@@ -1,5 +1,6 @@
 var fs = require('fs');
 var dir = "./"
+var fileNmae = "./http-server.js"
 const http = require("http")
 var files;
 
@@ -10,6 +11,7 @@ const response =JSON.stringify({ message : "Hello, World!" })
 
 const server = http.createServer((req, res) => {
   files = fs.readdirSync(dir);
+  fs.readFileSync(fileNmae);
   console.log(files);
   res.statusCode = 200
   res.setHeader("Content-Type", "application/json")
